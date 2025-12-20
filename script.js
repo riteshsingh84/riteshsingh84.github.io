@@ -193,3 +193,92 @@ const yearSpan = document.getElementById("year");
 if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
+
+// Featured work: fetch top repositories and render cards
+async function loadFeaturedWork(username = 'riteshsingh84', limit = 6) {
+    const container = document.getElementById('featured-grid');
+    if (!container) return;
+    try {
+        container.textContent = 'Loading featured projects…';
+
+        // Fetch public repos
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        if (!res.ok) throw new Error('GitHub API error');
+        const repos = await res.json();
+
+        // Sort by stargazers_count desc
+        repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+
+        const featured = repos.slice(0, limit);
+        container.innerHTML = '';
+
+        if (featured.length === 0) {
+            container.textContent = 'No public repositories found.';
+            return;
+        }
+
+        featured.forEach(repo => {
+            const card = document.createElement('div');
+            card.className = 'featured-card';
+
+            const title = document.createElement('h4');
+            const link = document.createElement('a');
+            link.href =  repo.homepage ? repo.homepage : repo.html_url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = repo.name;
+            title.appendChild(link);
+
+            const desc = document.createElement('p');
+            desc.textContent = repo.description || '';
+
+            const meta = document.createElement('div');
+            meta.className = 'featured-meta';
+
+            const lang = document.createElement('span');
+            const langDot = document.createElement('span');
+            langDot.className = 'lang-dot';
+            const langName = document.createElement('span');
+            langName.textContent = repo.language || '';
+
+            // Simple mapping for a few common languages
+            const langColors = {
+                'JavaScript': '#f1e05a',
+                'TypeScript': '#3178c6',
+                'Python': '#3572A5',
+                'C#': '#178600',
+                'C++': '#f34b7d',
+                'Java': '#b07219',
+                'HTML': '#e34c26',
+                'CSS': '#563d7c',
+            };
+
+            const color = langColors[repo.language] || '#9aa4b2';
+            langDot.style.background = color;
+            lang.appendChild(langDot);
+            lang.appendChild(langName);
+
+            const stars = document.createElement('span');
+            stars.className = 'featured-stars';
+            stars.innerHTML = `⭐ ${repo.stargazers_count}`;
+
+            meta.appendChild(lang);
+            meta.appendChild(stars);
+
+            card.appendChild(title);
+            if (desc.textContent) card.appendChild(desc);
+            card.appendChild(meta);
+
+            container.appendChild(card);
+        });
+
+    } catch (err) {
+        container.textContent = 'Could not load featured projects.';
+        console.error(err);
+    }
+}
+
+// Load featured work on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadFeaturedWork();
+});
