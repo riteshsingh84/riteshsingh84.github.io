@@ -5,7 +5,8 @@
     --bg-card-light: #ffffff;
     --text-dark: #e8e8ff;
     --text-light: #1d1b26;
-    --accent: #b06bff; /* Neon purple */
+    --accent: #b06bff;
+    /* Neon purple */
     --accent-soft: rgba(176, 107, 255, 0.2);
     --border-subtle-dark: #26263a;
     --border-subtle-light: #d3d3ea;
@@ -143,8 +144,29 @@ body.dark-mode #theme-toggle {
     padding: 80px 7vw 60px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     min-height: 70vh;
+    gap: 40px;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft-dark);
+    transition: transform var(--transition-med);
+}
+
+.hero-image:hover img {
+    transform: scale(1.02);
 }
 
 .hero-content {
@@ -207,7 +229,7 @@ body.dark-mode #theme-toggle {
     justify-content: center;
     gap: 8px;
     transition: background-color var(--transition-fast), color var(--transition-fast),
-                box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+        box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
 }
 
 .btn.primary {
@@ -290,7 +312,7 @@ body.light-mode .btn.outline:hover {
     border-radius: var(--radius-card);
     padding: 16px 16px 18px;
     transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med),
-                background-color var(--transition-med);
+        background-color var(--transition-med);
     position: relative;
     overflow: hidden;
 }
@@ -452,6 +474,68 @@ body.light-mode .placeholder-img {
     border: 1px solid rgba(176, 107, 255, 0.4);
     background: rgba(176, 107, 255, 0.08);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.article-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(176, 107, 255, 0.25);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-med);
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.05);
+}
+
+.article-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.article-content h3 {
+    font-size: 1.1rem;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    color: var(--accent);
+}
+
+.article-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn.small {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    align-self: flex-start;
+    margin-top: auto;
 }
 
 /* Contact */
@@ -486,8 +570,16 @@ body.light-mode .placeholder-img {
 /* Animations */
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
 }
 
 .fade-in {
@@ -507,13 +599,16 @@ body.light-mode .placeholder-img {
     .navbar {
         padding: 10px 4vw;
     }
+
     .nav-right {
         gap: 10px;
         font-size: 0.8rem;
     }
+
     .hero {
         padding: 60px 6vw 40px;
     }
+
     .hero-name {
         font-size: 2.3rem;
     }
@@ -523,13 +618,28 @@ body.light-mode .placeholder-img {
     .nav-right a {
         display: none;
     }
+
     #theme-toggle {
         margin-left: 0;
     }
+
+    .hero {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 100%;
+        justify-content: flex-start;
+    }
+
     .hero-actions {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .section {
         padding: 34px 6vw;
     }
@@ -539,10 +649,12 @@ body.light-mode .placeholder-img {
     .hero {
         padding-top: 40px;
     }
+
     .hero-name {
         font-size: 2rem;
     }
+
     .hero-typing {
         font-size: 1rem;
     }
-                                }
+}
