@@ -2,8 +2,10 @@
 // Typing effect for hero subtitle
 const roles = [
     "AI Engineering Lead",
-    "Product Consultant",
+    "AI Consultant",
+    "Product Engineer",
     "Software Architect",
+    "Transformational Leader & Mentor",
     "Tech Community Mentor"
 ];
 
@@ -97,4 +99,4 @@ observersTargets.forEach(el => observer.observe(el));
 const yearSpan = document.getElementById("year");
 if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
-                   }
+}

@@ -141,7 +141,7 @@ body.dark-mode #theme-toggle {
 /* Hero */
 
 .hero {
-    padding: 80px 7vw 60px;
+    padding: 60px 7vw 45px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -151,7 +151,7 @@ body.dark-mode #theme-toggle {
 
 .hero-image {
     flex: 1;
-    max-width: 500px;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,9 +160,7 @@ body.dark-mode #theme-toggle {
 .hero-image img {
     width: 100%;
     height: auto;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-soft-dark);
-    transition: transform var(--transition-med);
+    padding: 20px;
 }
 
 .hero-image:hover img {
@@ -183,8 +181,26 @@ body.dark-mode #theme-toggle {
 
 .hero-name {
     font-size: 3rem;
-    margin: 0 0 6px;
+    margin: 0;
     letter-spacing: 0.03em;
+}
+
+.hero-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 6px;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid transparent;
+    background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+        linear-gradient(135deg, var(--accent), #ff7edb) border-box;
+    box-shadow: 0 0 20px rgba(176, 107, 255, 0.4);
 }
 
 .hero-typing {
@@ -652,6 +668,12 @@ body.light-mode .placeholder-img {
 
     .hero-name {
         font-size: 2rem;
+    }
+
+    .hero-title-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .hero-typing {
