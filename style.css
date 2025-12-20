@@ -724,6 +724,7 @@ body.light-mode .footer {
 /* Add padding to main to prevent footer overlap */
 main {
     padding-bottom: 120px;
+    margin-bottom: 40px;
 }
 
 /* Animations */
