@@ -95,7 +95,7 @@ body.light-mode .navbar {
 
 /* Mobile menu toggle */
 .menu-toggle {
-    display: none;
+    display: inline-flex;
     background: transparent;
     border: 1px solid rgba(var(--accent-rgb), 0.12);
     padding: 6px 10px;
@@ -125,7 +125,7 @@ body.dark-mode .menu-toggle {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    z-index: 60;
+    z-index: 6000;
     opacity: 0;
     transform: translateY(-6px) scale(0.98);
     pointer-events: none;
@@ -935,4 +935,33 @@ body.dark-mode .mobile-menu a:hover {
 
 body.dark-mode .mobile-menu a:not(:first-child) {
     border-top: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Achievements badges */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.achievement-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--bg-card-light);
+    border: 1px solid var(--border-subtle-light);
+}
+
+.achievement-card img {
+    width: 100%;   
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+body.dark-mode .achievement-card {
+    background: radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.03), var(--bg-card-dark));
+    border: 1px solid rgba(var(--accent-rgb), 0.06);
 }

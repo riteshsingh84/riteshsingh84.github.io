@@ -282,3 +282,63 @@ async function loadFeaturedWork(username = 'riteshsingh84', limit = 6) {
 document.addEventListener('DOMContentLoaded', () => {
     loadFeaturedWork();
 });
+
+// Achievements: fetch badges markdown and render badge cards
+async function loadAchievements(mdUrl = 'https://raw.githubusercontent.com/riteshsingh84/CopilotLearningPath/main/docs/badges/Ritesh-Badges.md') {
+    const container = document.getElementById('achievements-grid');
+    if (!container) return;
+    try {
+        container.textContent = 'Loading achievements…';
+        const res = await fetch(mdUrl);
+        if (!res.ok) throw new Error('Failed to fetch badges markdown');
+        const md = await res.text();
+
+        // Simple regex to find markdown image/link blocks like: [<img ... src="..." />](link)
+        const badgeRegex = /\[<img[^>]*src="([^"]+)"[^>]*>\]\(([^)]+)\)/g;
+        let match;
+        const badges = [];
+        while ((match = badgeRegex.exec(md)) !== null) {
+            const imgSrc = match[1];
+            const link = match[2];
+            badges.push({ imgSrc, link });
+        }
+
+        if (badges.length === 0) {
+            container.textContent = 'No badges found.';
+            return;
+        }
+
+        container.innerHTML = '';
+        badges.forEach(b => {
+            const card = document.createElement('a');
+            card.className = 'achievement-card';
+            card.href = b.link;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+
+            const img = document.createElement('img');
+            // Convert blob URL to raw GitHub content URL if necessary
+            let src = b.imgSrc;
+            if (src.includes('github.com') && !src.includes('raw.githubusercontent.com')) {
+                src = src.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
+            }
+            img.src = src;
+
+            const title = document.createElement('div');
+            title.textContent = '';
+
+            card.appendChild(img);
+            card.appendChild(title);
+            container.appendChild(card);
+        });
+
+    } catch (err) {
+        container.textContent = 'Could not load achievements.';
+        console.error(err);
+    }
+}
+
+// Load achievements on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadAchievements();
+});
