@@ -47,6 +47,7 @@
         <div class="nav-left">
             <div class="logo">Ritesh<span>Singh</span></div>
         </div>
+        
         <nav class="nav-right">
             <a href="#hero">Home</a>
             <a href="#about">Summary</a>
@@ -57,10 +58,21 @@
             <a href="#github">GitHub</a>
             <a href="#linkedin">LinkedIn Posts</a>
             <a href="#contact">Contact</a>
-            <button id="theme-toggle" aria-label="Toggle theme">
-                ☾
-            </button>
+            
         </nav>
+
+        <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+            <a href="#hero">Home</a>
+            <a href="#about">Summary</a>
+            <a href="#strengths">Strengths</a>
+            <a href="#tech">Tech Stack</a>
+            <a href="#projects">Projects</a>
+            <a href="#community">Community</a>
+            <a href="#github">GitHub</a>
+            <a href="#linkedin">LinkedIn Posts</a>
+            <a href="#contact">Contact</a>           
+        </div>
+        <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </header>
 
     <main>
@@ -448,6 +460,9 @@
 
     <footer class="footer fade-in">
         <div class="footer-socials">
+            <button id="theme-toggle" aria-label="Toggle theme">
+                ☾
+            </button>
             <a href="https://www.linkedin.com/in/riteshsingh84" target="_blank" aria-label="LinkedIn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path

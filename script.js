@@ -76,6 +76,99 @@ if (themeToggle) {
     });
 }
 
+// Mobile menu toggle behavior
+const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+function closeMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('open');
+    mobileMenu.classList.add('closing');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    // after animation, ensure no pointer events
+    setTimeout(() => {
+        if (mobileMenu) mobileMenu.classList.remove('closing');
+    }, 220);
+    releaseFocusTrap();
+}
+
+function openMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+    activateFocusTrap(mobileMenu);
+}
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        if (!mobileMenu) return;
+        const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+        if (isOpen) closeMobileMenu(); else openMobileMenu();
+    });
+}
+
+// Close mobile menu when any link inside it is clicked
+if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+}
+
+// Sync theme toggle inside mobile menu
+if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener('click', () => {
+        if (themeToggle) themeToggle.click();
+    });
+}
+
+// Close on resize or ESC
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 720) {
+        closeMobileMenu();
+    }
+});
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileMenu();
+    if (e.key === 'Tab') maintainFocus(e);
+});
+
+// Focus trap implementation
+let lastFocusedElement = null;
+let trapElements = [];
+
+function activateFocusTrap(container) {
+    lastFocusedElement = document.activeElement;
+    trapElements = Array.from(container.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+    if (trapElements.length) trapElements[0].focus();
+}
+
+function releaseFocusTrap() {
+    trapElements = [];
+    if (lastFocusedElement) lastFocusedElement.focus();
+    lastFocusedElement = null;
+}
+
+function maintainFocus(e) {
+    if (!mobileMenu) return;
+    const isOpen = mobileMenu.getAttribute('aria-hidden') === 'false';
+    if (!isOpen || trapElements.length === 0) return;
+    const first = trapElements[0];
+    const last = trapElements[trapElements.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+    }
+}
+
 // Scroll reveal for sections
 const observersTargets = document.querySelectorAll(".fade-in");
 
