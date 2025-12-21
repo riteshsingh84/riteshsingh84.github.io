@@ -185,13 +185,14 @@ body.dark-mode .menu-toggle:hover {
     opacity: 1;
     transform: translateY(0) scale(1);
     pointer-events: auto;
+    z-index: 7000;
 }
 
 .mobile-menu a {
-    padding: 10px 12px;
+    padding: 0px 12px;
     text-decoration: none;
     color: inherit;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     transition: background-color 160ms var(--transition-fast), padding-left 160ms var(--transition-fast), color 160ms var(--transition-fast);
 }
 
@@ -216,10 +217,6 @@ body.dark-mode .menu-toggle:hover {
     padding-top: 12px;
 }
 
-body.dark-mode .mobile-menu a:not(:first-child) {
-    border-top-color: rgba(var(--accent-rgb), 0.06);
-}
-
 /* desktop nav hover subtle background */
 .nav-right a:hover {
     background: rgba(var(--accent-rgb), 0.03);
@@ -230,12 +227,6 @@ body.dark-mode .mobile-menu a:not(:first-child) {
 .mobile-menu .mobile-theme-toggle {
     margin-top: 8px;
     align-self: flex-start;
-}
-
-.mobile-menu.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
 }
 
 .mobile-menu.closing {
@@ -959,7 +950,7 @@ body.dark-mode .footer {
     background: rgba(2, 4, 10, 0.95);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-}
+
 /* Planned Projects and Featured Work card bottom-right button fix */
 .project-card {
     display: flex;
@@ -1120,7 +1111,7 @@ body.dark-mode .mobile-menu a:hover {
 }
 
 body.dark-mode .mobile-menu a:not(:first-child) {
-    border-top: 1px solid rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 /* Achievements badges */
