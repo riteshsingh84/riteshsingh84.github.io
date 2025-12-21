@@ -342,3 +342,63 @@ async function loadAchievements(mdUrl = 'https://raw.githubusercontent.com/rites
 document.addEventListener('DOMContentLoaded', () => {
     loadAchievements();
 });
+
+// Subscription handling for Planned Projects
+document.addEventListener('DOMContentLoaded', () => {
+    const emailInput = document.getElementById('subscribe-email');
+    const subscribeBtn = document.getElementById('subscribe-btn');
+    const msg = document.getElementById('subscribe-msg');
+
+    function validateEmail(e) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\\.,;:\s@\"]+\.)+[^<>()[\]\\.,;:\s@\"]{2,})$/i;
+        return re.test(String(e).toLowerCase());
+    }
+
+    if (subscribeBtn && emailInput) {
+        subscribeBtn.addEventListener('click', async () => {
+            const email = emailInput.value.trim();
+            if (!validateEmail(email)) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.style.color = 'var(--accent-secondary)';
+                return;
+            }
+            // If an endpoint is configured (e.g., Cloudflare Worker), POST there
+            const endpoint = window.SUBSCRIBE_ENDPOINT || null;
+            if (endpoint) {
+                try {
+                    const r = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    if (r.ok) {
+                        msg.textContent = 'Subscribed — thanks! Check your inbox for confirmation.';
+                        msg.style.color = 'var(--accent)';
+                        emailInput.value = '';
+                    } else {
+                        const txt = await r.text();
+                        msg.textContent = 'Subscription failed: ' + txt;
+                        msg.style.color = 'var(--accent-secondary)';
+                    }
+                } catch (err) {
+                    msg.textContent = 'Subscription failed (network). Saved locally.';
+                    msg.style.color = 'var(--accent-secondary)';
+                    saveLocal(email);
+                    emailInput.value = '';
+                }
+            } else {
+                saveLocal(email);
+                msg.textContent = 'Subscribed locally — stored in browser.';
+                msg.style.color = 'var(--accent)';
+                emailInput.value = '';
+            }
+        });
+    }
+});
+
+function saveLocal(email) {
+    let subs = [];
+    try { subs = JSON.parse(localStorage.getItem('subs') || '[]'); } catch (e) { subs = []; }
+    if (!subs.includes(email)) subs.push(email);
+    localStorage.setItem('subs', JSON.stringify(subs));
+}
