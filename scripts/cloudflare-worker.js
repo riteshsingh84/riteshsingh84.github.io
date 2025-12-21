@@ -1,3 +1,5 @@
+// Expected client: POST JSON { email: string } to the Worker root URL.
+// Example client endpoint: https://collect-emails.YOUR_DOMAIN.workers.dev/
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
 })

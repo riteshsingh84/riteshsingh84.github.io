@@ -601,6 +601,15 @@
             Architect · Transformational Leader & Mentor · Tech Community Mentor</p>
     </footer>
 
+    <!-- Configure subscription endpoint: replace the example URL with your Cloudflare Worker URL -->
+    <script>
+        // Example Cloudflare Worker URL (replace this with your deployed Worker URL)
+        // e.g. https://collect-emails.example.workers.dev
+        (function() {
+            // If you prefer to set this at build time, replace the string below.
+            window.SUBSCRIBE_ENDPOINT = 'https://example-collect-emails.workers.dev/';
+        })();
+    </script>
     <script src="scripts/script.js"></script>
 </body>
 
