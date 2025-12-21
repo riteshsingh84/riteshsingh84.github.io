@@ -71,7 +71,7 @@ body.light-mode {
     padding: 14px 7vw;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 body.dark-mode .navbar {
@@ -928,8 +928,7 @@ body.dark-mode .featured-stars {
 
 /* Footer */
 
-.footer {
-    padding: 16px 7vw;
+.footer {    
     font-size: 0.8rem;
     text-align: center;
     opacity: 1;
@@ -948,7 +947,7 @@ body.dark-mode .featured-stars {
 
 body.dark-mode .footer {
     background: rgba(2, 4, 10, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Planned Projects and Featured Work card bottom-right button fix */
@@ -971,7 +970,7 @@ body.dark-mode .footer {
     display: flex;
     justify-content: center;
     gap: 24px;
-    margin-bottom: 6px;
+    margin-top: 6px;
 }
 
 .footer-socials a {
