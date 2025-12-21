@@ -448,6 +448,7 @@ body.light-mode .card {
     background: radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.1), transparent 55%);
     opacity: 0;
     transition: opacity var(--transition-med);
+    pointer-events: none;
 }
 
 .card:hover::before {
@@ -1012,4 +1013,60 @@ body.dark-mode .mobile-menu a:not(:first-child) {
 body.dark-mode .achievement-card {
     background: radial-gradient(circle at top left, rgba(var(--accent-rgb), 0.03), var(--bg-card-dark));
     border: 1px solid rgba(var(--accent-rgb), 0.06);
+}
+
+/* Project action button icon sizing */
+.project-actions .btn svg {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 180ms var(--transition-fast), color 180ms var(--transition-fast), filter 180ms var(--transition-fast);
+    color: currentColor;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.project-actions .btn {
+    /* match primary button sizing for a consistent look */
+    padding: 10px 22px;
+    font-size: 0.88rem;
+}
+
+.project-actions .btn:hover svg,
+.project-actions .btn:focus-visible svg {
+    color: var(--accent);
+    transform: translateY(-2px) scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(var(--accent-rgb), 0.18));
+}
+
+.project-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+/* Social icons: show as monochrome by default, color on hover/focus */
+.footer-socials a svg {
+    filter: grayscale(100%);
+    opacity: 0.92;
+    transition: filter 180ms var(--transition-fast), color 180ms var(--transition-fast), opacity 180ms var(--transition-fast);
+    color: inherit;
+}
+
+.footer-socials a:hover svg,
+.footer-socials a:focus-visible svg {
+    filter: none;
+    color: var(--accent);
+    opacity: 1;
+}
+
+/* Focus-visible outlines for keyboard users (target interactive controls) */
+.menu-toggle:focus-visible,
+.mobile-menu a:focus-visible,
+.nav-right a:focus-visible,
+.btn:focus-visible,
+.footer-socials a:focus-visible {
+    outline: 3px solid rgba(var(--accent-secondary-rgb), 0.14);
+    outline-offset: 3px;
+    border-radius: 8px;
 }
