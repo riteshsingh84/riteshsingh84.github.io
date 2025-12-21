@@ -238,6 +238,7 @@ async function loadFeaturedWork(username = 'riteshsingh84', limit = 6) {
         featured.forEach(repo => {
             const card = document.createElement('div');
             card.className = 'featured-card';
+            card.style.position = 'relative';
 
             const title = document.createElement('h4');
             const link = document.createElement('a');
@@ -249,6 +250,55 @@ async function loadFeaturedWork(username = 'riteshsingh84', limit = 6) {
 
             const desc = document.createElement('p');
             desc.textContent = repo.description || '';
+            desc.title = repo.description || '';
+
+            // Show full description on click/hover only if more than 6 lines
+            let expanded = false;
+            let expandedDiv = null;
+            // Helper to count lines in a string (approximate)
+            function countLines(str) {
+                if (!str) return 0;
+                // Assume about 80 chars per line for this card
+                return Math.ceil(str.length / 80);
+            }
+            const descLineCount = countLines(repo.description);
+            if (descLineCount > 6) {
+                function showFullDesc(e) {
+                    if (expanded) return;
+                    expanded = true;
+                    expandedDiv = document.createElement('div');
+                    expandedDiv.className = 'featured-card p expanded';
+                    expandedDiv.textContent = repo.description || '';
+                    expandedDiv.style.position = 'absolute';
+                    expandedDiv.style.left = '0';
+                    expandedDiv.style.right = '0';
+                    expandedDiv.style.top = desc.offsetTop + desc.offsetHeight + 8 + 'px';
+                    expandedDiv.style.background = 'rgba(20,24,40,0.98)';
+                    expandedDiv.style.color = '#fff';
+                    expandedDiv.style.padding = '18px 16px';
+                    expandedDiv.style.borderRadius = '10px';
+                    expandedDiv.style.zIndex = '100';
+                    expandedDiv.style.boxShadow = '0 8px 32px rgba(0,0,0,0.28)';
+                    expandedDiv.style.minWidth = '220px';
+                    expandedDiv.style.maxWidth = '440px';
+                    expandedDiv.style.fontSize = '1rem';
+                    expandedDiv.style.lineHeight = '1.6';
+                    expandedDiv.style.cursor = 'pointer';
+                    expandedDiv.addEventListener('mouseleave', hideFullDesc);
+                    expandedDiv.addEventListener('click', hideFullDesc);
+                    card.appendChild(expandedDiv);
+                }
+                function hideFullDesc() {
+                    if (expandedDiv && expandedDiv.parentNode) expandedDiv.parentNode.removeChild(expandedDiv);
+                    expanded = false;
+                }
+                desc.addEventListener('mouseenter', showFullDesc);
+                desc.addEventListener('mouseleave', hideFullDesc);
+                desc.addEventListener('click', function(e) {
+                    if (!expanded) showFullDesc(e);
+                    else hideFullDesc();
+                });
+            }
 
             const meta = document.createElement('div');
             meta.className = 'featured-meta';
@@ -286,6 +336,25 @@ async function loadFeaturedWork(username = 'riteshsingh84', limit = 6) {
             card.appendChild(title);
             if (desc.textContent) card.appendChild(desc);
             card.appendChild(meta);
+
+            // Add Learn more button at bottom right
+            const actions = document.createElement('div');
+            actions.className = 'project-actions';
+            actions.style.marginTop = 'auto';
+            actions.style.display = 'flex';
+            actions.style.justifyContent = 'flex-end';
+            actions.style.alignItems = 'flex-end';
+
+            const learnMore = document.createElement('a');
+            learnMore.className = 'btn primary';
+            learnMore.textContent = 'Learn more';
+            learnMore.href = repo.homepage ? repo.homepage : repo.html_url;
+            learnMore.target = '_blank';
+            learnMore.rel = 'noopener noreferrer';
+            learnMore.setAttribute('aria-label', `Learn more about ${repo.name}`);
+
+            actions.appendChild(learnMore);
+            card.appendChild(actions);
 
             container.appendChild(card);
         });
