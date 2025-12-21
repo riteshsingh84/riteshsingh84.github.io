@@ -801,6 +801,9 @@ body.dark-mode .featured-stars {
 .community-cta {
     margin-top: 20px;
 }
+.community-cta a {
+    margin: 10px;
+}
 
 /* GitHub graph */
 
