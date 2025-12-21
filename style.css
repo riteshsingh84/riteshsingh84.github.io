@@ -844,14 +844,6 @@ body.dark-mode .featured-stars {
     color: #fff; /* LinkedIn blue */
 }
 
-/* Idea icon sizing inside buttons */
-.project-actions .icon-idea {
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
-    vertical-align: middle;
-    flex: 0 0 18px;
-}
 
 /* Ensure project action buttons match primary button padding */
 .project-actions .btn {
