@@ -841,7 +841,7 @@ body.dark-mode .featured-stars {
     color: #24292e; /* GitHub gray */
 }
 .link-linkedin svg {
-    color: #0A66C2; /* LinkedIn blue */
+    color: #fff; /* LinkedIn blue */
 }
 
 /* Idea icon sizing inside buttons */
