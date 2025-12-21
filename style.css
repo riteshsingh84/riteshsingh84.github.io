@@ -505,6 +505,12 @@ body.light-mode .tech-item {
     gap: 8px;
 }
 
+/* Ensure project-actions sits at the bottom-right of the card */
+.project-card {
+    position: relative;
+    padding-bottom: 56px; /* room for the action button */
+}
+
 .project-image {
     border-radius: 10px;
     padding: 16px;
@@ -1040,7 +1046,10 @@ body.dark-mode .achievement-card {
 }
 
 .project-actions {
-    margin-top: 12px;
+    /* position at bottom-right inside the project card */
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
     display: flex;
     gap: 8px;
 }
