@@ -142,7 +142,7 @@ body.dark-mode .menu-toggle:hover {
 
 .mobile-menu {
     position: absolute;
-    top: 64px;
+    top: 50px;
     right: 7vw;
     width: calc(100% - 14vw);
     max-width: 320px;
