@@ -1,0 +1,20 @@
+[
+{
+    "title": "GitHub Copilot Learning Path",
+    "description": "Welcome to the GitHub Copilot Learning Path - your comprehensive guide to mastering AI-assisted programming. This resource is designed to help developers of all levels harness the power of GitHub Copilot, enhancing productivity and code quality through effective prompt engineering and context management.",
+    "link": "https://github.com/riteshsingh84/CopilotLearningPath/blob/main/docs/GitHub%20Copilot%20Learning%20Path%20PPT.pdf",
+    "tags": ["AI Powered Coding", "Copilot", "Copilot for Developers"]
+  },
+  {
+    "title": "Your Guide to GH-300: Mastering GitHub Copilot",
+    "description": "The GitHub Copilot certification exam evaluates your skill in using the AI-driven code completion tool in various programming languages, certifying your capability to optimize software development workflows efficiently.",
+    "link": "https://github.com/riteshsingh84/CopilotLearningPath/blob/main/docs/GH-300_Certification_Strategy_Guide.pdf",
+    "tags": ["GH-300", "Copilot", "Certification GitHub Copilot"]
+  },
+  {
+    "title": "Introduction to Prompt Engineering with GitHub Copilot",
+    "description": "Prompt engineering is both an art and a science critical for achieving precise, context-aware code suggestions and improving overall developer productivity.",
+    "link": "https://github.com/riteshsingh84/CopilotLearningPath/blob/main/docs/Introduction-to-Prompt-Engineering-with-GitHub-Copilot.pdf",
+    "tags": ["Prompt Engineering", "Context Engineering", "AI Powered Coding", "Copilot"]
+  }
+]

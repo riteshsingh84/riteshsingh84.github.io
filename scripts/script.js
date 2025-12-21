@@ -1,3 +1,65 @@
+// Useful Resources: fetch resources.json and render resource cards
+async function loadResources(jsonUrl = 'scripts/data/resources.json') {
+    const container = document.getElementById('resources-grid');
+    if (!container) return;
+    try {
+        container.textContent = 'Loading resources…';
+        const res = await fetch(jsonUrl);
+        if (!res.ok) throw new Error('Failed to fetch resources');
+        const resources = await res.json();
+        if (!Array.isArray(resources) || resources.length === 0) {
+            container.textContent = 'No resources found.';
+            return;
+        }
+        container.innerHTML = '';
+        resources.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'resource-card';
+
+            const title = document.createElement('h3');
+            title.textContent = item.title;
+            card.appendChild(title);
+
+            const desc = document.createElement('p');
+            desc.textContent = item.description;
+            card.appendChild(desc);
+
+            if (item.tags && item.tags.length) {
+                const meta = document.createElement('div');
+                meta.className = 'resource-meta';
+                item.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'resource-tag';
+                    tagEl.textContent = tag;
+                    meta.appendChild(tagEl);
+                });
+                card.appendChild(meta);
+            }
+
+            const actions = document.createElement('div');
+            actions.className = 'resource-actions';
+            const downloadBtn = document.createElement('a');
+            downloadBtn.className = 'btn primary';
+            downloadBtn.textContent = 'Download';
+            downloadBtn.href = item.link;
+            downloadBtn.target = '_blank';
+            downloadBtn.rel = 'noopener noreferrer';
+            downloadBtn.setAttribute('aria-label', `Download ${item.title}`);
+            actions.appendChild(downloadBtn);
+            card.appendChild(actions);
+
+            container.appendChild(card);
+        });
+    } catch (err) {
+        container.textContent = 'Could not load resources.';
+        console.error(err);
+    }
+}
+
+// Load resources on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadResources();
+});
 
 // Typing effect for hero subtitle
 const roles = [
