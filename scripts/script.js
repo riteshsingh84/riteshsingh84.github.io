@@ -98,7 +98,10 @@ function closeMobileMenu() {
     mobileMenu.classList.remove('open');
     mobileMenu.classList.add('closing');
     mobileMenu.setAttribute('aria-hidden', 'true');
-    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('open');
+    }
     // after animation, ensure no pointer events
     setTimeout(() => {
         if (mobileMenu) mobileMenu.classList.remove('closing');
@@ -110,7 +113,10 @@ function openMobileMenu() {
     if (!mobileMenu) return;
     mobileMenu.classList.add('open');
     mobileMenu.setAttribute('aria-hidden', 'false');
-    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+    if (menuToggle) {
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.classList.add('open');
+    }
     activateFocusTrap(mobileMenu);
 }
 

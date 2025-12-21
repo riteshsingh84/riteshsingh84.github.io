@@ -111,6 +111,28 @@ body.dark-mode .menu-toggle {
     color: var(--text-dark);
 }
 
+.menu-toggle:hover {
+    background: rgba(var(--accent-rgb), 0.06);
+    transform: translateY(-1px);
+    border-color: rgba(var(--accent-secondary-rgb), 0.35);
+}
+
+.menu-toggle:focus-visible {
+    outline: 3px solid rgba(var(--accent-secondary-rgb), 0.14);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+body.light-mode .menu-toggle:hover {
+    background: rgba(var(--accent-rgb), 0.08);
+    border-color: rgba(var(--accent-secondary-rgb), 0.25);
+}
+
+body.dark-mode .menu-toggle:hover {
+    background: rgba(var(--accent-rgb), 0.12);
+    border-color: rgba(var(--accent-secondary-rgb), 0.4);
+}
+
 .mobile-menu {
     position: absolute;
     top: 64px;
@@ -132,12 +154,47 @@ body.dark-mode .menu-toggle {
     transition: opacity 200ms var(--transition-fast), transform 200ms var(--transition-fast);
 }
 
+/* Hamburger icon animation */
+.icon-hamburger { display: inline-block; }
+.icon-hamburger .line {
+    transition: transform 220ms var(--transition-fast), opacity 160ms var(--transition-fast), stroke 220ms var(--transition-fast);
+    transform-origin: 12px 12px; /* center */
+}
+/* When open, form a clean X without rotating the container */
+.menu-toggle.open .icon-hamburger .line1 {
+    transform: translateY(6px) rotate(45deg);
+    stroke: var(--accent);
+}
+.menu-toggle.open .icon-hamburger .line2 {
+    opacity: 0;
+}
+.menu-toggle.open .icon-hamburger .line3 {
+    transform: translateY(-6px) rotate(-45deg);
+    stroke: var(--accent);
+}
+
+/* Mobile menu open state animation */
+.mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
 .mobile-menu a {
     padding: 10px 12px;
     text-decoration: none;
     color: inherit;
     border-radius: 8px;
     transition: background-color 160ms var(--transition-fast), padding-left 160ms var(--transition-fast), color 160ms var(--transition-fast);
+}
+
+.mobile-menu a svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+    opacity: 0.9;
+    color: inherit;
 }
 
 .mobile-menu a:hover {
@@ -148,8 +205,12 @@ body.dark-mode .menu-toggle {
 
 /* separators between mobile menu items */
 .mobile-menu a:not(:first-child) {
-    border-top: 1px solid rgba(0,0,0,0.04);
+    border-top: 1px solid rgba(0,0,0,0.08);
     padding-top: 12px;
+}
+
+body.dark-mode .mobile-menu a:not(:first-child) {
+    border-top-color: rgba(var(--accent-rgb), 0.06);
 }
 
 /* desktop nav hover subtle background */
@@ -735,6 +796,28 @@ body.dark-mode .featured-stars {
     background: rgba(var(--accent-rgb), 0.05);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+/* Brand-colored icon helpers */
+.link-github svg {
+    color: #24292e; /* GitHub gray */
+}
+.link-linkedin svg {
+    color: #0A66C2; /* LinkedIn blue */
+}
+
+/* Idea icon sizing inside buttons */
+.project-actions .icon-idea {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+    flex: 0 0 18px;
+}
+
+/* Ensure project action buttons match primary button padding */
+.project-actions .btn {
+    padding: 10px 18px;
 }
 
 .article-card {
