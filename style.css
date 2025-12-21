@@ -916,7 +916,7 @@ body.dark-mode .featured-stars {
 .btn.small {
     padding: 8px 16px;
     font-size: 0.8rem;
-    align-self: flex-start;
+    align-self: flex-end;
     margin-top: auto;
 }
 
